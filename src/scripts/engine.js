@@ -15,13 +15,20 @@ const state = {
     },
     actions:{
         button: document.getElementById("next-duel"),
-        muteBtn: document.getElementById(""),
+        muteBtn: document.getElementById("mute-icon"),
+        tutorialBtn: document.getElementById("tutorial-icon"),
+        tutotial_closeBtn: document.getElementById("tutotialBtn"),
     },
     playerSides:{
         player1: "player-cards",
         computer: "computer-cards",
         playerBox: document.querySelector("#player-cards"),
         computerBox: document.querySelector("#computer-cards"),
+    },
+    system:{
+        bgMusic: document.getElementById("background-music"),
+        tutorialBox: document.querySelector(".tutorial-box"),
+        isFirstClick: true,
     },
 };
 
@@ -119,7 +126,7 @@ async function checkDuelResults(playerCardId, computerCarId) {
         state.score.computerScore++;
     }
 
-    await playAudio(duelResults);
+    await playAudio(duelResults, "wav", 1);
 
     return duelResults;
 }
@@ -159,15 +166,59 @@ async function resetDuel() {
     init();
 }
 
-async function playAudio(status) {
-    const audio = new Audio(`./src/assets/audios/${status}.wav`);
+async function playAudio(status, type, volume) {
+    const audio = new Audio(`./src/assets/audios/${status}.${type}`);
     
     try {
+        if(status == "Win"){
+            audio.volume = 0.5;
+        }
+        else{
+            audio.volume = volume;
+        }
         audio.play();
     } catch (error) {
         console.log(error);
     }
 }
+
+function playBgMusic(bgMusic, volume) {
+    bgMusic.volume = volume;
+    bgMusic.play();
+}
+
+state.actions.muteBtn.addEventListener("click", () => {
+    const bgMusic = state.system.bgMusic;
+    const muteIcon = state.actions.muteBtn;
+
+    if (!bgMusic.paused) {
+        bgMusic.pause();
+        muteIcon.classList.remove('fa-volume-high');
+        muteIcon.classList.add('fa-volume-xmark');
+    } else {
+        playBgMusic(bgMusic, 0.3);
+        muteIcon.classList.remove('fa-volume-xmark');
+        muteIcon.classList.add('fa-volume-high');
+    }
+});
+
+state.actions.tutotial_closeBtn.addEventListener("click", () => {
+    const tutorialBox = state.system.tutorialBox;
+    const bgMusic = state.system.bgMusic;
+    const isFirstClick = state.system.isFirstClick;
+
+    tutorialBox.style.display = "none";
+    if (isFirstClick && bgMusic.paused) {
+        playBgMusic(bgMusic, 0.3);
+        state.system.isFirstClick = false;
+    }
+});
+
+state.actions.tutorialBtn.addEventListener("click", () => {
+    const tutorialBox = state.system.tutorialBox;
+
+    tutorialBox.style.display = "flex";
+});
 
 function init() {
     state.fieldCards.player.style.display = "none";

@@ -17,6 +17,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
+    <!--font-awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- Adicione o favicon -->
     <link rel="icon" type="image/ico" href="./src/assets/favicon/Favicon.ico">
 
@@ -24,7 +27,7 @@
 </head>
 <body>
     <audio id="background-music" loop>
-        <source src="./src/assets/music/.mp3" type="audio/mp3">
+        <source src="./src/assets/audios/egyptian_duel.mp3" type="audio/mp3">
     </audio>
     
     <div class="bg-video">
@@ -34,9 +37,34 @@
     </div>
 
     <div class="container">
+        <div class="tutorial-box">
+            <h1>Tutorial</h1>
+            <div class="tutorial-box-text">
+                <p>Olá! Bem-vindo à arena Yu-Gi-Oh.</p>
+                <p>
+                    Aqui nesta arena, as regras são simples. Cada desafiante possui 5 cartas em seu deck, sendo que cada carta contém um monstro de um tipo específico, que irá decidir o resultado da batalha.
+                </p>
+                <p>
+                    Basicamente, esta arena Yu-Gi-Oh funciona como uma versão do jogo pedra, papel e tesoura, onde o resultado das batalhas entre os monstros é determinado pelos seus tipos:<br><br>
+                    Pedra <span style="color: #008000;">GANHA</span> da tesoura;<br><br>
+                    Tesoura <span style="color: #008000;">GANHA</span> do papel;<br><br>
+                    Papel <span style="color: #008000;">GANHA</span> da pedra.
+                </p>
+            </div>
+
+            <div>
+                <button id="tutotialBtn" class="rpgui-button">Entendi</button>
+            </div>
+        </div>
+
         <div class="container__left framed-golden-2">
             <div class="score_box frame">
                 <span id="score_points">Win: 0 | Lose: 0</span>
+
+                <div class="action_assets">
+                    <i class="fa-solid fa-volume-high" id="mute-icon"></i>
+                    <i class="fa-solid fa-question" id="tutorial-icon"></i>
+                </div>
             </div>
 
             <div class="menu_avatar">
