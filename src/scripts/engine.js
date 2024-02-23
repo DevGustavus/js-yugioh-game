@@ -113,16 +113,16 @@ async function drawButton(text) {
 }
 
 async function checkDuelResults(playerCardId, computerCarId) {
-    let duelResults = "Draw";
+    let duelResults = "draw";
     let playerCard = cardData[playerCardId];
 
     if(playerCard.winOf.includes(computerCarId)) {
-        duelResults = "Win";
+        duelResults = "win";
         state.score.playerScore++;
     }
 
     if(playerCard.LoseOf.includes(computerCarId)) {
-        duelResults = "Lose";
+        duelResults = "lose";
         state.score.computerScore++;
     }
 
@@ -166,11 +166,11 @@ async function resetDuel() {
     init();
 }
 
-function playAudio(status, type, volume) {
+async function playAudio(status, type, volume) {
     const audio = new Audio(`./src/assets/audios/${status}.${type}`);
     
     try {
-        if(status == "Win"){
+        if(status == "win"){
             audio.volume = 0.5;
         }
         else{
